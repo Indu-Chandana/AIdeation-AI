@@ -1,3 +1,4 @@
+import CreateNoteDiaog from '@/components/CreateNoteDiaog'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { UserButton } from '@clerk/nextjs'
@@ -30,7 +31,13 @@ const DashboardPage = (props: Props) => {
 
                     <div className='h-8' />
                     {/* list all the notes */}
+                    {/* Condionally rendered */}
                     <div className=' text-center'> <h2 className=' text-xl text-gray-500'>You have no notes yet.</h2></div>
+
+                    {/* display all the notes */}
+                    <div className='grid sm:grid-cols-3 md:grid-cols-5 grid-cols-1 gap-3'>
+                        <CreateNoteDiaog />
+                    </div>
                 </div>
             </div>
         </>
