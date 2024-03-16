@@ -1,14 +1,47 @@
 "use client"
 import React, { useState } from 'react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
-import { Plus } from 'lucide-react'
+import { Loader2, Plus } from 'lucide-react'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
+import { useMutation } from '@tanstack/react-query'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 type Props = {}
 
 const CreateNoteDiaog = (props: Props) => {
+    const router = useRouter()
+
     const [input, setInput] = useState("")
+
+    const createNotebook = useMutation({
+        mutationFn: async () => {
+            const response = await axios.post('/api/createNoteBook', {
+                name: input
+            })
+            return response.data
+        }
+    })
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (input === '') {
+            window.alert('Please enter a name for your notebook')
+            return
+        }
+
+        createNotebook.mutate(undefined, {
+            onSuccess: ({ note_id }) => {
+                console.log('yayy note created. note_id ::', { note_id })
+                router.push(`/notebook/${note_id}`)
+            },
+            onError: (error) => {
+                console.error('error handle submit ::', error)
+                window.alert("Failed to create new notebook");
+            }
+        })
+    }
 
     return (
         <Dialog>
@@ -26,12 +59,16 @@ const CreateNoteDiaog = (props: Props) => {
                     </DialogDescription>
                 </DialogHeader>
 
-                <form>
+                <form onSubmit={handleSubmit}>
                     <Input value={input} onChange={(e) => setInput(e.target.value)} placeholder='Name...' />
                     <div className=' h-4'></div>
                     <div className='flex items-center gap-2'>
                         <Button type='reset' variant={'secondary'}>Cancel</Button>
-                        <Button type='submit' className=' bg-green-600'>Create</Button>
+                        <Button type='submit' className=' bg-green-600' disabled={createNotebook.isPending}>
+                            {createNotebook.isPending && (
+                                <Loader2 className=' w-4 h-4 mr-2 animate-spin' />
+                            )}
+                            Create</Button>
                     </div>
                 </form>
             </DialogContent>
