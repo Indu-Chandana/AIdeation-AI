@@ -27,7 +27,8 @@ const TipTapEditor = (props: Props) => {
                 {editor && <TipTapMenuBar editor={editor} />}
                 <Button>Saved</Button>
             </div>
-            <div>
+            {/* Now you can use the - prose - classes to add sensible typography styles to any vanilla HTML: H1, H2, p */}
+            <div className=' prose'>
                 <EditorContent editor={editor} />
             </div>
         </>
