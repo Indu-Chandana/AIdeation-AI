@@ -7,7 +7,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
     container: {
@@ -74,7 +74,10 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require('@tailwindcss/typography'), // we installed dev depen '@tailwindcss/typography', default H1 H2 tags in the hrml (tip tap editor) not showing. https://github.com/tailwindlabs/tailwindcss-typography
+  ],
 } satisfies Config
 
 export default config
