@@ -83,6 +83,7 @@
 /* First we check via inspector and see that classnames '.tiptap.ProseMirror' */
 .tiptap.ProseMirror {
   outline: none;
+  background-color: white;
 }
 
 /* TipTap menuBar isActive */
