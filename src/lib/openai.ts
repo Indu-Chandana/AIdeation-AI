@@ -16,7 +16,8 @@ export async function generateImagePrompt(name: string) {
             messages: [
                 {
                     role: 'system',
-                    content: 'You are an creative and helpfull AI assistante capable of generating interesting thumbnail description for my notes. Your output will be fed into the DALLE API to generate the thumbnail. The description should be minimalistic and flat styled'
+                    content: `You are an creative and helpfull AI assistante capable of generating interesting thumbnail description for my notes. 
+                    Your output will be fed into the DALLE API to generate the thumbnail. The description should be minimalistic and flat styled`
                 },
                 {
                     role: "user",
