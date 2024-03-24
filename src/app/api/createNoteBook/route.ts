@@ -22,6 +22,7 @@ export async function POST(req: Request) {
         return new NextResponse("failed to generate image description from openai", { status: 500 })
     }
 
+    // dalle url valind only two hours, we need to save that into another permanent storage. In this case we are using firebase 
     const image_url = await generateImage(image_description); // time to generate img from openai DALL.E
 
     if (!image_url) {
