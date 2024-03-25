@@ -34,6 +34,8 @@ const CreateNoteDiaog = (props: Props) => {
         createNotebook.mutate(undefined, {
             onSuccess: ({ note_id }) => {
                 console.log('yayy note created. note_id ::', { note_id })
+
+                // hit another endpoint upload the temp Dalle url to permenent firebase storage
                 router.push(`/notebook/${note_id}`)
             },
             onError: (error) => {
