@@ -21,4 +21,4 @@ export default {
 
 // we can see that using this command
 // for that we need to install pg -> npm install pg
-// npm drizzle-kit studio
+// npx drizzle-kit studio
