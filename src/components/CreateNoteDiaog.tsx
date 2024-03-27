@@ -15,6 +15,15 @@ const CreateNoteDiaog = (props: Props) => {
 
     const [input, setInput] = useState("")
 
+    const uploadToFirebase = useMutation({
+        mutationFn: async (note_id: string) => {
+            const response = await axios.post('/api/uploadToFirebase', {
+                noteId: note_id
+            })
+            return response.data
+        }
+    })
+
     const createNotebook = useMutation({
         mutationFn: async () => {
             const response = await axios.post('/api/createNoteBook', {
@@ -36,6 +45,15 @@ const CreateNoteDiaog = (props: Props) => {
                 console.log('yayy note created. note_id ::', { note_id })
 
                 // hit another endpoint upload the temp Dalle url to permenent firebase storage
+
+                uploadToFirebase.mutate(note_id, {
+                    onSuccess: (data) => {
+                        console.log('success data ::', data)
+                    },
+                    onError: (error) => {
+                        console.log('error uploadToFirebase ::', error)
+                    }
+                })
                 router.push(`/notebook/${note_id}`)
             },
             onError: (error) => {

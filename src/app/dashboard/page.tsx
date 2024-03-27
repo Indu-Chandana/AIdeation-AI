@@ -6,6 +6,7 @@ import { $notes } from '@/lib/db/schema'
 import { UserButton, auth } from '@clerk/nextjs'
 import { eq } from 'drizzle-orm'
 import { ArrowLeft } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -51,9 +52,9 @@ const DashboardPage = async (props: Props) => {
                         <CreateNoteDiaog />
                         {notes.map(note => {
                             return (
-                                <a href={`/notes/${note.id}`} key={note.id}>
+                                <a href={`/notebook/${note.id}`} key={note.id}>
                                     <div className=' rounded-lg overflow-hidden flex flex-col border border-stone-200 hover:shadow-xl transition hover:-translate-y-1'>
-                                        <img
+                                        <Image // next img helps us optimize the img further
                                             width={400} height={200}
                                             src={note.imageUrl || ''} alt={note.name}
                                         />
