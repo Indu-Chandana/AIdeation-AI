@@ -6,6 +6,8 @@ import { generateImage, generateImagePrompt } from "@/lib/openai";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
+export const runtime = "edge" // nextJS vercel wll detect it. and automatically will deploy this function on the edge runtime. instead of the normal nodeTS runtime.
+
 export async function POST(req: Request) {
     const { userId } = auth();
 
